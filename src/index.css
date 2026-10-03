@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    background: #000;
+  }
+  body {
+    @apply bg-black font-sans text-white antialiased;
+    margin: 0;
+  }
+  ::selection {
+    @apply bg-brand text-white;
+  }
+  :focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-extrabold uppercase tracking-wider transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl active:scale-100;
+  }
+  .btn-red {
+    @apply bg-brand text-white hover:bg-brand-dark hover:shadow-brand/40;
+  }
+  .btn-black {
+    @apply bg-black text-white hover:bg-brand;
+  }
+  /* Contorno escuro, para fundos claros */
+  .btn-outline {
+    @apply border-2 border-black text-black hover:bg-black hover:text-white;
+  }
+  /* Contorno claro, para fundos escuros */
+  .btn-outline-light {
+    @apply border-2 border-white text-white hover:bg-white hover:text-black;
+  }
+  .display {
+    @apply font-display uppercase leading-[0.95] tracking-tight;
+  }
+  /* Cantos em "colchete", inspirados no monograma NË */
+  .brackets {
+    position: relative;
+  }
+  .brackets::before,
+  .brackets::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+    border-color: #F40D0D;
+    border-style: solid;
+  }
+  .brackets::before {
+    top: -10px;
+    left: -10px;
+    border-width: 4px 0 0 4px;
+  }
+  .brackets::after {
+    bottom: -10px;
+    right: -10px;
+    border-width: 0 4px 4px 0;
+  }
+  /* Efeito de entrada ao fazer scroll (ver components/Reveal.tsx) */
+  .reveal {
+    opacity: 0;
+    transition:
+      opacity 800ms cubic-bezier(0.22, 0.7, 0.2, 1),
+      transform 800ms cubic-bezier(0.22, 0.7, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-up {
+    transform: translateY(36px);
+  }
+  .reveal-left {
+    transform: translateX(-44px);
+  }
+  .reveal-right {
+    transform: translateX(44px);
+  }
+  .reveal-zoom {
+    transform: scale(0.94);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
