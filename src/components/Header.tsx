@@ -34,7 +34,7 @@ export default function Header() {
           href="#inicio"
           aria-label="Nova Era Entretenimento — início"
           onClick={() => setOpen(false)}
-          className="transition-all duration-300 hover:scale-105"
+          className="shrink-0 transition-all duration-300 hover:scale-105"
         >
           <span className="flex items-center gap-3">
             <img
@@ -45,12 +45,20 @@ export default function Header() {
               className="h-12 w-12 shrink-0 sm:h-14 sm:w-14"
               draggable={false}
             />
-            {/* Mesma família tipográfica do logotipo: sans geométrica pesada + linha espaçada */}
-            <span className="flex flex-col font-logo uppercase text-brand">
-              <span className="text-[19px] font-extrabold leading-none tracking-tight sm:text-2xl xl:text-[27px]">Nova Era</span>
-              <span className="mt-1 text-[7.5px] font-semibold leading-none tracking-[0.34em] sm:text-[9px] xl:text-[10px]">
-                Entretenimento
+            {/* NOVA ERA numa só linha; ENTRETENIMENTO por baixo, esticado exactamente à largura de NOVA ERA */}
+            <span className="flex shrink-0 flex-col items-stretch font-logo uppercase text-brand">
+              <span className="whitespace-nowrap text-[21px] font-extrabold leading-none tracking-tight sm:text-[26px] xl:text-[29px]">
+                Nova Era
               </span>
+              <span
+                aria-hidden="true"
+                className="mt-[5px] flex w-0 min-w-full justify-between text-[7px] font-semibold leading-none sm:text-[8.5px] xl:text-[9.5px]"
+              >
+                {'ENTRETENIMENTO'.split('').map((ch, i) => (
+                  <span key={i}>{ch}</span>
+                ))}
+              </span>
+              <span className="sr-only">Entretenimento</span>
             </span>
           </span>
         </a>

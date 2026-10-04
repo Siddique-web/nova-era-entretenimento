@@ -38,7 +38,7 @@ export default function BrandBlock({ events, onSelect }: BrandBlockProps) {
             plateia.
           </p>
           <p className="mt-3 max-w-lg text-base leading-relaxed text-black/70 sm:text-lg">
-            Escolha o seu evento, reserve o bilhete e levante-o num ponto autorizado da cidade.
+            Escolha o seu evento, pague pelo telemóvel ou banco, envie o comprovativo e receba o PDF da reserva. Assim que o pagamento for confirmado, o bilhete fica válido.
           </p>
 
           <dl className="mt-9 grid max-w-lg grid-cols-3 gap-4 border-l-4 border-brand pl-5">

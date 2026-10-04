@@ -23,6 +23,12 @@ export const whatsappLink = (number: string, message: string): string =>
 export const isValidMzPhone = (value: string): boolean =>
   /^(\+?258)?8[2-7]\d{7}$/.test(value.replace(/[\s-]/g, ''));
 
+export const formatDateTime = (iso: string): string =>
+  new Intl.DateTimeFormat('pt-PT', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(iso));
+
+/** Só os últimos 9 dígitos (ignora +258 e espaços) para comparar contactos */
+export const normalizePhone = (value: string): string => value.replace(/\D/g, '').slice(-9);
+
 export const makeReservationCode = (): string => {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let out = 'NE-';

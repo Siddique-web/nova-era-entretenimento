@@ -63,3 +63,32 @@ export interface MerchItem {
   src?: string;
   colors?: MerchColor[]; // se existir, o cliente escolhe a cor e a foto muda
 }
+
+export type ReservationStatus = 'pendente' | 'confirmado' | 'rejeitado';
+
+export interface ReservationItem {
+  lotId: LotId;
+  label: string;
+  qty: number;
+  unitPrice: number;
+}
+
+export interface Reservation {
+  code: string;
+  eventId: string;
+  eventTitle: string;
+  eventCategory: string;
+  eventDate: string; // ISO
+  eventTime: string;
+  eventVenue: string;
+  poster?: string;
+  items: ReservationItem[];
+  total: number;
+  name: string;
+  phone: string;
+  method: string; // método de pagamento escolhido
+  proof?: string; // data URL (JPEG) do comprovativo; só vem no painel de administração
+  status: ReservationStatus;
+  createdAt: string; // ISO
+  confirmedAt?: string;
+}

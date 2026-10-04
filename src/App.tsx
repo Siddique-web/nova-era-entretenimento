@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Header from './components/Header';
 import HeroSlideshow from './components/HeroSlideshow';
 import BrandBlock from './components/BrandBlock';
@@ -11,6 +11,9 @@ import Merch from './components/Merch';
 import Footer from './components/Footer';
 import TicketModal from './components/TicketModal';
 import Splash from './components/Splash';
+import ReservationLookup from './components/ReservationLookup';
+import AdminPanel from './components/AdminPanel';
+import { ADMIN_HASH } from './data/site';
 import { EVENTS } from './data/events';
 import { NEWS } from './data/news';
 import type { EventItem } from './types';
@@ -18,6 +21,15 @@ import type { EventItem } from './types';
 export default function App() {
   const [selected, setSelected] = useState<EventItem | null>(null);
   const close = useCallback(() => setSelected(null), []);
+  const [isAdmin, setIsAdmin] = useState(() => window.location.hash === ADMIN_HASH);
+
+  useEffect(() => {
+    const onHash = () => setIsAdmin(window.location.hash === ADMIN_HASH);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  if (isAdmin) return <AdminPanel />;
 
   return (
     <>
@@ -34,6 +46,7 @@ export default function App() {
         <BrandBlock events={EVENTS} onSelect={setSelected} />
         <Agenda events={EVENTS} onSelect={setSelected} />
         <News events={EVENTS} onSelect={setSelected} />
+        <ReservationLookup />
         <History />
         <PastEditions />
         <Gallery />
